@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { WorksSection } from './ui/Home-Works';
 import TeamMembersSection from './ui/Home-TeamMembers';
 import sampleVideo from '../../public/assets/sample.mp4';
