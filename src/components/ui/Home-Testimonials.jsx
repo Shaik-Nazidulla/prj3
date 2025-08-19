@@ -266,7 +266,7 @@ const TestimonialsSection = () => {
       <div className="absolute top-4 md:top-6 lg:top-8 left-1/2 transform -translate-x-1/2 z-30">
         <div 
           ref={titleRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white opacity-0"
+          className="text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white opacity-0 whitespace-nowrap"
         >
           <div 
             ref={typingRef}
@@ -276,6 +276,7 @@ const TestimonialsSection = () => {
           </div>
         </div>
       </div>
+
 
       {/* Horizontal scrolling container */}
       <div 

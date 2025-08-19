@@ -133,11 +133,13 @@ const HowWeCraft = () => {
               y: -8,
               ease: "power2.out"
             });
-            gsap.to(cardIcon, {
-              duration: 0.3,
-              scale: 1.1,
-              ease: "power2.out"
-            });
+            if (cardIcon) {
+              gsap.to(cardIcon, {
+                duration: 0.3,
+                scale: 1.1,
+                ease: "power2.out"
+              });
+            }
           });
           
           cardElement.addEventListener('mouseleave', () => {
@@ -146,11 +148,13 @@ const HowWeCraft = () => {
               y: 0,
               ease: "power2.out"
             });
-            gsap.to(cardIcon, {
-              duration: 0.3,
-              scale: 1,
-              ease: "power2.out"
-            });
+            if (cardIcon) {
+              gsap.to(cardIcon, {
+                duration: 0.3,
+                scale: 1,
+                ease: "power2.out"
+              });
+            }
           });
         }
       });
@@ -163,7 +167,7 @@ const HowWeCraft = () => {
   return (
     <section
       ref={servicesRef}
-      className="py-12 sm:py-16 md:py-20 lg:py-32 bg-black relative"
+      className="py-12 sm:py-16 md:py-20 lg:py-32 bg-black relative overflow-visible"
     >
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-5">
@@ -178,7 +182,7 @@ const HowWeCraft = () => {
           >
             <div className="flex items-center space-x-4">
               <div className="w-12 sm:w-16 md:w-20 h-px bg-gradient-to-r from-transparent via-white/40 to-white/40"></div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-wide text-white">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-wide text-white text-center">
                 How We Craft Digital Magic
               </h2>
               <div className="w-12 sm:w-16 md:w-20 h-px bg-gradient-to-l from-transparent via-white/40 to-white/40"></div>
@@ -186,70 +190,80 @@ const HowWeCraft = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-7xl mx-auto">
-          {/* Block 1 */}
-          <div className="professional-card group">
-            <div className="card-content relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 sm:p-8 md:p-10 h-full transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20 hover:shadow-2xl hover:shadow-white/5">
+        {/* FIXED: Improved grid layout with better mobile handling */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-7xl mx-auto">
+          {/* Block 1 - Digital Storytelling */}
+          <div className="professional-card group w-full">
+            <div className="card-content relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20 hover:shadow-2xl hover:shadow-white/5">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-white/5 to-transparent rounded-tr-xl"></div>
               
-              <div className="card-icon w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 sm:mb-8 border border-white/10 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/20">
+              <div className="card-icon w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 sm:mb-8 border border-white/10 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/20 flex-shrink-0">
                 <FiGlobe className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white" />
               </div>
               
-              <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-white leading-tight">
-                Digital Storytelling
-              </h4>
-              
-              <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-300 transition-colors duration-300">
-                We don't just build websites — we craft digital experiences that reflect your brand's story, personality, and purpose across every pixel.
-              </p>
+              <div className="flex-grow">
+                <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-white leading-tight">
+                  Digital Storytelling
+                </h4>
+                
+                <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-300 transition-colors duration-300">
+                  We don't just build websites — we craft digital experiences that reflect your brand's story, personality, and purpose across every pixel.
+                </p>
+              </div>
               
               <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           </div>
 
-          {/* Block 2 */}
-          <div className="professional-card group">
-            <div className="card-content relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 sm:p-8 md:p-10 h-full transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20 hover:shadow-2xl hover:shadow-white/5">
+          {/* Block 2 - Seamless Journeys */}
+          <div className="professional-card group w-full">
+            <div className="card-content relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20 hover:shadow-2xl hover:shadow-white/5">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-white/5 to-transparent rounded-tr-xl"></div>
               
-              <div className="card-icon w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 sm:mb-8 border border-white/10 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/20">
+              <div className="card-icon w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 sm:mb-8 border border-white/10 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/20 flex-shrink-0">
                 <FiSmartphone className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white" />
               </div>
               
-              <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-white leading-tight">
-                Seamless Journeys
-              </h4>
-              
-              <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-300 transition-colors duration-300">
-                From landing page to checkout, we design seamless user flows that make your audience feel at home — and keep them coming back.
-              </p>
+              <div className="flex-grow">
+                <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-white leading-tight">
+                  Seamless Journeys
+                </h4>
+                
+                <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-300 transition-colors duration-300">
+                  From landing page to checkout, we design seamless user flows that make your audience feel at home — and keep them coming back.
+                </p>
+              </div>
               
               <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           </div>
 
-          {/* Block 3 */}
-          <div className="professional-card group sm:col-span-2 lg:col-span-1">
-            <div className="card-content relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 sm:p-8 md:p-10 h-full transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20 hover:shadow-2xl hover:shadow-white/5">
+          {/* Block 3 - Experience Engineering */}
+          <div className="professional-card group w-full md:col-span-2 lg:col-span-1">
+            <div className="card-content relative bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-xl p-6 sm:p-8 md:p-10 min-h-[280px] sm:min-h-[320px] md:min-h-[350px] flex flex-col transition-all duration-500 hover:bg-white/[0.04] hover:border-white/20 hover:shadow-2xl hover:shadow-white/5">
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-white/5 to-transparent rounded-tr-xl"></div>
               
-              <div className="card-icon w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 sm:mb-8 border border-white/10 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/20">
+              <div className="card-icon w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 sm:mb-8 border border-white/10 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/20 flex-shrink-0">
                 <FiZap className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 text-white" />
               </div>
               
-              <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-white leading-tight">
-                Experience Engineering
-              </h4>
-              
-              <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-300 transition-colors duration-300">
-                We fuse design, code, and performance into cohesive systems — ensuring every interaction is fast, functional, and unforgettable.
-              </p>
+              <div className="flex-grow">
+                <h4 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-white leading-tight">
+                  Experience Engineering
+                </h4>
+                
+                <p className="text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg group-hover:text-gray-300 transition-colors duration-300">
+                  We fuse design, code, and performance into cohesive systems — ensuring every interaction is fast, functional, and unforgettable.
+                </p>
+              </div>
               
               <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           </div>
         </div>
+
+        {/* ADDED: Extra spacing at bottom to prevent next section overlap */}
+        <div className="h-8 sm:h-12 md:h-16"></div>
       </div>
     </section>
   );

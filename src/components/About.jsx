@@ -19,7 +19,6 @@ import OurWorks from './ui/About-OurWorks';
 import OurVision from './ui/About-Vision';
 import HowWeCraft from './ui/About-HowWeCraft';
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 function About() {
@@ -333,14 +332,11 @@ function About() {
         </div>
       </section>
 
-     <OurVision/>
-     <OurWorks/>
-
-     {/* How We Craft Digital Magic Section - Now using separate component */}
-     
+      <OurVision/>
+      <OurWorks/>
 
       {/* Professional Workflow Section - Mobile Optimized */}
-      <section ref={workflowRef} className=" sm:pb-16 md:pb-30 lg:pb-50 bg-black">
+      <section ref={workflowRef} className="sm:pb-16 md:pb-30 lg:pb-50 bg-black h-full">
         <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
           {/* Title Section */}
           <div className="text-center mb-8 md:mb-16">
@@ -355,7 +351,7 @@ function About() {
 
           {/* Desktop Layout: Side by side - Fixed visibility */}
           <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
-            {/* Left Side: Description - Removed sticky positioning and opacity-0 class */}
+            {/* Left Side: Description */}
             <div className="space-y-8">
               <p 
                 ref={workflowDescriptionRef}
@@ -388,7 +384,7 @@ function About() {
             
             {/* Right Side: Cards */}
             <div className="relative">
-              <div style={{ height: '500px', position: 'relative' }}>
+              <div className="h-[500px] relative">
                 <CardSwap
                   cardDistance={30}
                   verticalDistance={50}
@@ -423,8 +419,8 @@ function About() {
               </div>
             </div>
           </div>
-          
-          {/* Mobile & Tablet Layout */}
+
+          {/* Mobile & Tablet Layout - FIXED CARD HEIGHT */}
           <div className="lg:hidden">
             {/* Description */}
             <div className="text-center mb-8 sm:mb-12">
@@ -437,47 +433,70 @@ function About() {
               </p>
             </div>
             
-            {/* Cards */}
-            <div className="max-w-sm sm:max-w-md mx-auto">
-              <div style={{ height: isMobile ? '400px' : '500px', position: 'relative' }}>
-                <CardSwap
-                  cardDistance={isMobile ? 15 : 20}
-                  verticalDistance={isMobile ? 30 : 40}
-                  delay={4000}
-                  pauseOnHover={true}
-                >
-                  {workflowSteps.map((step, index) => {
-                    const IconComponent = step.icon;
-                    return (
-                      <Card key={step.id}>
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 h-full min-h-[350px] sm:min-h-[400px] flex flex-col justify-center relative overflow-hidden hover:bg-white/8 hover:border-white/20 transition-all duration-500">
-                          <div className="text-center relative z-10">
-                            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-white/20">
-                              <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+            {/* Additional content for better visual balance - Centered for mobile */}
+            <div className="text-center mb-8 sm:mb-12">
+              <div className="space-y-4 text-gray-300 max-w-sm sm:max-w-md mx-auto">
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-sm sm:text-base">Comprehensive research and planning phase</span>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-sm sm:text-base">Creative design and user experience focus</span>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-sm sm:text-base">Cutting-edge development technologies</span>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-sm sm:text-base">Rigorous testing and quality assurance</span>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <span className="text-sm sm:text-base">Ongoing support and maintenance</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Cards - Centered - FIXED HEIGHT ISSUE */}
+            <div className="flex justify-center">
+              <div className="max-w-sm sm:max-w-md">
+                {/* FIXED: Increased mobile height to accommodate full card content */}
+                <div className="h-[200px] sm:h-[200px] mb-30 relative">
+                  <CardSwap
+                    cardDistance={isMobile ? 15 : 20}
+                    verticalDistance={isMobile ? 30 : 40}
+                    delay={4000}
+                    pauseOnHover={true}
+                  >
+                    {workflowSteps.map((step, index) => {
+                      const IconComponent = step.icon;
+                      return (
+                        <Card key={step.id}>
+                          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 h-full min-h-[380px] sm:min-h-[420px] flex flex-col justify-center relative overflow-hidden hover:bg-white/8 hover:border-white/20 transition-all duration-500">
+                            <div className="text-center relative z-10">
+                              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 border border-white/20">
+                                <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                              </div>
+                              <div className="inline-block px-2 py-1 sm:px-3 sm:py-1 bg-white/10 rounded-full text-xs font-medium text-white/70 mb-3 border border-white/20">
+                                Step {step.id}
+                              </div>
+                              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 text-white leading-tight">
+                                {step.title}
+                              </h3>
+                              <p className="text-gray-300 text-sm sm:text-base leading-relaxed px-2">
+                                {step.description}
+                              </p>
                             </div>
-                            <div className="inline-block px-2 py-1 sm:px-3 sm:py-1 bg-white/10 rounded-full text-xs font-medium text-white/70 mb-3 border border-white/20">
-                              Step {step.id}
-                            </div>
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 text-white leading-tight">
-                              {step.title}
-                            </h3>
-                            <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                              {step.description}
-                            </p>
+                            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                           </div>
-                          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                        </div>
-                      </Card>
-                    );
-                  })}
-                </CardSwap>
+                        </Card>
+                      );
+                    })}
+                  </CardSwap>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
        
-        
       <HowWeCraft />  
 
       {/* Enhanced CTA Section - Mobile Optimized */}

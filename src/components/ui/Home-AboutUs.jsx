@@ -86,22 +86,17 @@ function HomeAboutUs() {
   }, []);
 
   return (
-    <section ref={aboutSectionRef} className="relative z-20 pt-40 flex items-center ">
+    <section ref={aboutSectionRef} className="relative z-20 lg:pt-20 flex items-center">
       <Lamp className="p-0">
         <div
           ref={aboutContentRef}
-          className="relative z-50 max-w-7xl mx-auto px-6 md:px-12 lg:px-24"
+          className="relative z-50 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-50 md:pt-0"
         >
-          <div className="text-center ">
+          <div className="text-center">
             {/* Title */}
             <h2
               ref={aboutTitleRef}
-              className="text-5xl md:text-6xl lg:text-7xl font-light mt-2 tracking-wide opacity-0 relative bg-gradient-to-br from-white to-gray-600 bg-clip-text text-black pt-34 "
-              style={{
-                backgroundImage: 'linear-gradient(to bottom right, #ffffff, #9ca3af)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'black'
-              }}
+              className="text-5xl md:text-6xl lg:text-7xl font-light mt-2 tracking-wide opacity-0 relative bg-transparent text-black pt-34"
             >
               ABOUT US
               <div className="absolute -inset-2 bg-gradient-to-r from-white/20 via-gray-300/20 to-white/20 blur-xl rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

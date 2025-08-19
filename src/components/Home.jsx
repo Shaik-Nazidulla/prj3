@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WorksSection } from './ui/Home-Works';
 import TeamMembersSection from './ui/Home-TeamMembers';
-import sampleVideo from '../../public/assets/sample.mp4';
+import sampleVideo from '/assets/sample.mp4';
 import { Link } from 'react-router-dom';
 import HomeFAQs from './ui/Home-FAQs';
 import Testimonials from './ui/Home-Testimonials';
@@ -246,8 +246,8 @@ function Home() {
       </div>
 
       {/* Hero Text Container - Positioned absolutely over video with negative margin to overlay */}
-      <div ref={heroContainerRef} className="relative z-30 -mt-[100vh]">
-        <div className="flex flex-col justify-center items-start pl-0 pr-0 pointer-events-none font-sans lg:pt-150 md:pt-170 sm:pt-150" style={{ height: '100vh' }}>
+      <div ref={heroContainerRef} className="relative z-30 -mt-[98vh]">
+        <div className="flex flex-col justify-center items-start pl-0 pr-0 pointer-events-none font-sans pt-5 lg:pt-160 md:pt-170 sm:pt-150" style={{ height: '100vh' }}>
           {/* Hero Text Structure with Individual Refs */}
           <div className="flex flex-col">
             {/* "THE" - Top with increased font weight */}

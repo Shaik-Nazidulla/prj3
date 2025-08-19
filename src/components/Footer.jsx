@@ -115,7 +115,7 @@ const Footer = () => {
           </div>
 
           {/* Right Section - Navigation Links */}
-          <div className="flex flex-col space-y-3 sm:space-y-15 lg:space-y-12 flex-shrink-0">
+          <div className="flex flex-col space-y-8 sm:space-y-15 lg:space-y-12 flex-shrink-0 ">
             {navItems.map((item, index) => (
               <div key={index} className="flex items-center justify-end space-x-1 sm:space-x-2 lg:space-x-4">
                 <a

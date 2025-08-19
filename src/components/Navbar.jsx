@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -21,6 +22,12 @@ const Navbar = () => {
   const socialLinksRef = useRef([]);
   const copyrightRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const navigate = useNavigate();
+
+   // Handle navigation to contact us page
+   const handleContactNavigation = () => {
+    navigate('/ContactUs'); 
+  };
 
   useEffect(() => {
     // Create scroll trigger for navbar hide/show on ALL pages
@@ -51,6 +58,8 @@ const Navbar = () => {
         paused: true
       }
     );
+
+   
 
     // Navbar scroll behavior - hides/shows based on scroll direction after 100vh
     ScrollTrigger.create({
@@ -360,7 +369,10 @@ const Navbar = () => {
             <div className="flex items-center space-x-3 sm:space-x-4">
               {/* Let's Talk Button - Desktop */}
               <div className="hidden lg:block">
-                <button className="border border-white/60 px-4 lg:px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm font-medium text-white">
+                <button 
+                onClick={handleContactNavigation}
+                className="border border-white/60 px-4 lg:px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm font-medium text-white">
+                  
                   Let's talk
                 </button>
               </div>

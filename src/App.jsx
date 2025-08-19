@@ -1,4 +1,4 @@
-//app.jsx - Cleaned up with Navbar moved to separate component
+//app.jsx 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   return (
     <>
-      {/* Navbar Component - Now handles all navbar functionality */}
+      {/* Navbar Component */}
       <Navbar />
 
       {/* Routes */}
@@ -29,7 +29,7 @@ function App() {
         <Route path="/ContactUs" element={<ContactUs />} />
       </Routes>
 
-      {/* Footer Component - Shows on all pages */}
+      {/* Footer Component */}
       <Footer />
     </>
   );

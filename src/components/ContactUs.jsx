@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Star, CheckCircle, MapPin, Phone, Mail, Clock } from 'lucide-react';
+import bengaluru from '../assets/bengaluru.png';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const ContactUs = () => {
   const subtitleRef = useRef(null);
   const starRef = useRef(null);
   const officeRef = useRef(null);
+  
 
   useEffect(() => {
     const formContainer = formRef.current;
@@ -98,7 +100,7 @@ const ContactUs = () => {
     <div className="min-h-screen bg-black">
       {/* Contact Form Section */}
       <div className="flex items-center justify-center py-20 sm:py-20 lg:py-40 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-7xl bg-gradient-to-br from-slate-50 to-slate-50 rounded-sm shadow-2xl overflow-hidden">
+        <div className="w-full max-w-7xl bg-gradient-to-br from-slate-50 to-slate-50 rounded-sm shadow-2xl overflow-hidden relative">
           {/* Header Section */}
           <div className="text-center py-8 sm:py-12 px-4 sm:px-8 relative">
             <h1 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl font-light text-slate-800 mb-4 tracking-wide">
@@ -110,7 +112,7 @@ const ContactUs = () => {
           </div>
 
           {/* Form Section */}
-          <div className="px-4 sm:px-8 pb-8 sm:pb-12">
+          <div className="px-4 sm:px-8 pb-8 sm:pb-12 relative z-10">
             <div ref={formRef} className="space-y-6 sm:space-y-8">
               {/* Name and Email Row */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -165,12 +167,12 @@ const ContactUs = () => {
               </div>
 
               {/* Requirement Dropdown */}
-              <div>
+              <div className="relative">
                 <select
                   name="requirement"
                   value={formData.requirement}
                   onChange={handleInputChange}
-                  className="w-full px-0 py-3 sm:py-4 bg-transparent border-0 border-b-2 border-slate-400 text-slate-800 focus:outline-none focus:border-slate-700 transition-all duration-300 appearance-none cursor-pointer text-xs sm:text-sm font-medium tracking-widest uppercase"
+                  className="w-full px-0 py-3 sm:py-4 bg-transparent border-0 border-b-2 border-slate-400 text-slate-800 focus:outline-none focus:border-slate-700 transition-all duration-300 appearance-none cursor-pointer text-xs sm:text-sm font-medium tracking-widest uppercase relative z-20"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 0 center',
@@ -181,7 +183,7 @@ const ContactUs = () => {
                 >
                   <option value="" disabled className="bg-slate-50 text-slate-500">CHOOSE YOUR REQUIREMENT</option>
                   {requirementOptions.map((option) => (
-                    <option key={option} value={option} className="bg-slate-50 text-slate-800">
+                    <option key={option} value={option} className="bg-slate-50 text-slate-800 py-2">
                       {option.toUpperCase()}
                     </option>
                   ))}
@@ -189,12 +191,12 @@ const ContactUs = () => {
               </div>
 
               {/* Budget Range Dropdown */}
-              <div>
+              <div className="relative">
                 <select
                   name="budget"
                   value={formData.budget}
                   onChange={handleInputChange}
-                  className="w-full px-0 py-3 sm:py-4 bg-transparent border-0 border-b-2 border-slate-400 text-slate-800 focus:outline-none focus:border-slate-700 transition-all duration-300 appearance-none cursor-pointer text-xs sm:text-sm font-medium tracking-widest uppercase"
+                  className="w-full px-0 py-3 sm:py-4 bg-transparent border-0 border-b-2 border-slate-400 text-slate-800 focus:outline-none focus:border-slate-700 transition-all duration-300 appearance-none cursor-pointer text-xs sm:text-sm font-medium tracking-widest uppercase relative z-20"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
                     backgroundPosition: 'right 0 center',
@@ -205,7 +207,7 @@ const ContactUs = () => {
                 >
                   <option value="" disabled className="bg-slate-50 text-slate-500">SELECT BUDGET RANGE</option>
                   {budgetRanges.map((budget) => (
-                    <option key={budget} value={budget} className="bg-slate-50 text-slate-800">
+                    <option key={budget} value={budget} className="bg-slate-50 text-slate-800 py-2">
                       {budget}
                     </option>
                   ))}
@@ -264,14 +266,14 @@ const ContactUs = () => {
       {/* Office Information Section */}
       <div ref={officeRef} className="relative py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-16 items-start">
             
             {/* Left Side - Office Image */}
-            <div className="relative group order-2 lg:order-1">
+            <div className="relative group">
               <div className="overflow-hidden rounded-sm shadow-2xl">
-                <div className="aspect-[3/4] lg:aspect-[3/4] bg-white relative">
+                <div className="aspect-[3/4] bg-white relative">
                   <img
-                    src="@assets/bengaluruImg.png"
+                    src={bengaluru}
                     alt="Our Office"
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -281,12 +283,12 @@ const ContactUs = () => {
                       e.target.parentNode.innerHTML = `
                         <div class="flex items-center justify-center h-full">
                           <div class="text-center">
-                            <div class="w-16 h-16 mx-auto mb-4 text-slate-400">
+                            <div class="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 mx-auto mb-2 sm:mb-4 text-slate-400">
                               <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                               </svg>
                             </div>
-                            <p class="text-slate-600 font-light text-lg tracking-wide">OUR OFFICE</p>
+                            <p class="text-slate-600 font-light text-xs sm:text-sm lg:text-lg tracking-wide">OUR OFFICE</p>
                           </div>
                         </div>
                       `;
@@ -297,28 +299,28 @@ const ContactUs = () => {
             </div>
 
             {/* Right Side - Contact Information */}
-            <div className="space-y-6 sm:space-y-8 order-1 lg:order-2">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-8">
               <div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-4 sm:mb-6 tracking-wide leading-tight">
+                <h2 className="text-lg sm:text-2xl lg:text-4xl xl:text-6xl font-light text-white mb-2 sm:mb-4 lg:mb-6 tracking-wide leading-tight">
                   VISIT OUR
                   <br />
-                  <span className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl">OFFICE</span>
+                  <span className="text-sm sm:text-xl lg:text-3xl xl:text-5xl">OFFICE</span>
                 </h2>
               </div>
 
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-6">
                 {/* Company Name */}
-                <div className="border-b border-slate-700 pb-3 sm:pb-4">
-                  <h3 className="text-xl sm:text-2xl font-light text-white tracking-wide mb-2">
+                <div className="border-b border-slate-700 pb-2 sm:pb-3 lg:pb-4">
+                  <h3 className="text-xs sm:text-lg lg:text-2xl font-light text-white tracking-wide mb-1 sm:mb-2">
                     AROHANCE TECH Solutions Pvt Ltd
                   </h3>
                 </div>
 
                 {/* Address */}
-                <div className="flex items-start space-x-3 sm:space-x-4">
-                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 mt-1 flex-shrink-0" />
+                <div className="flex items-start space-x-2 sm:space-x-3 lg:space-x-4">
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 text-slate-400 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed tracking-wide">
+                    <p className="text-slate-300 text-xs sm:text-sm lg:text-lg font-light leading-relaxed tracking-wide">
                       Block A, 4th Floor,<br />
                       Tech Park Complex,<br />
                       Whitefield Road,<br />
@@ -328,13 +330,13 @@ const ContactUs = () => {
                 </div>
 
                 {/* Opening Hours */}
-                <div className="flex items-start space-x-3 sm:space-x-4">
-                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 mt-1 flex-shrink-0" />
+                <div className="flex items-start space-x-2 sm:space-x-3 lg:space-x-4">
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 text-slate-400 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-slate-400 text-xs sm:text-sm font-medium tracking-wider uppercase mb-1">
+                    <p className="text-slate-400 text-xs sm:text-xs lg:text-sm font-medium tracking-wider uppercase mb-1">
                       Business Hours
                     </p>
-                    <p className="text-slate-300 text-base sm:text-lg font-light tracking-wide">
+                    <p className="text-slate-300 text-xs sm:text-sm lg:text-lg font-light tracking-wide">
                       Monday - Friday: 9:00 AM - 6:00 PM<br />
                       Saturday: 10:00 AM - 4:00 PM
                     </p>
@@ -342,26 +344,26 @@ const ContactUs = () => {
                 </div>
 
                 {/* Contact Details */}
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 flex-shrink-0" />
+                <div className="space-y-2 sm:space-y-3 lg:space-y-4">
+                  <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                    <Phone className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 text-slate-400 flex-shrink-0" />
                     <div>
-                      <p className="text-slate-400 text-xs sm:text-sm font-medium tracking-wider uppercase">
+                      <p className="text-slate-400 text-xs sm:text-xs lg:text-sm font-medium tracking-wider uppercase">
                         Phone
                       </p>
-                      <p className="text-slate-300 text-base sm:text-lg font-light tracking-wide">
+                      <p className="text-slate-300 text-xs sm:text-sm lg:text-lg font-light tracking-wide">
                         +91 80 4577 4508
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 flex-shrink-0" />
+                  <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                    <Mail className="w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 text-slate-400 flex-shrink-0" />
                     <div>
-                      <p className="text-slate-400 text-xs sm:text-sm font-medium tracking-wider uppercase">
+                      <p className="text-slate-400 text-xs sm:text-xs lg:text-sm font-medium tracking-wider uppercase">
                         Email
                       </p>
-                      <p className="text-slate-300 text-base sm:text-lg font-light tracking-wide">
+                      <p className="text-slate-300 text-xs sm:text-sm lg:text-lg font-light tracking-wide">
                         info@techcorpsolutions.com
                       </p>
                     </div>
