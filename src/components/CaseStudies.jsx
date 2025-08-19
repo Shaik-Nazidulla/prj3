@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ExternalLink, Code, Smartphone, Monitor, Globe, ArrowRight } from 'lucide-react';
-import Silk from './ui/CaseStudies-HeroBackground';
+import { X, ExternalLink, Code, Smartphone, Monitor, Globe, ArrowRight, Calendar, Users, Trophy, ChevronDown } from 'lucide-react';
 
 const CaseStudies = () => {
   const [selectedStudy, setSelectedStudy] = useState(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState(null);
   const cardsRef = useRef([]);
-  const containerRef = useRef(null);
   const heroRef = useRef(null);
-  const horizontalRef = useRef(null);
-  const slidesRef = useRef([]);
+  const gridRef = useRef(null);
 
-  // Case studies data
+  // Case studies data - 9 projects
   const caseStudies = [
     {
       id: 1,
@@ -19,34 +16,48 @@ const CaseStudies = () => {
       client: "RetailMax Inc.",
       industry: "E-Commerce",
       type: "Website",
+      year: "2024",
+      duration: "6 months",
+      team: "5 people",
       icon: <Globe className="w-6 h-6" />,
-      problem: "Outdated platform causing 60% cart abandonment rates",
-      description: "Complete redesign of e-commerce platform with modern UX/UI and optimized checkout flow.",
       image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      slides: [
+      description: "Complete redesign of e-commerce platform with modern UX/UI and optimized checkout flow.",
+      overview: "RetailMax was struggling with an outdated e-commerce platform that resulted in 60% cart abandonment rates, poor mobile experience, and loading times exceeding 8 seconds. We transformed their digital presence with a modern, high-performance platform.",
+      challenge: "The existing platform was built on legacy technology, causing severe performance issues and user experience problems that directly impacted sales and customer satisfaction.",
+      solution: "We built a modern, responsive e-commerce platform using React.js and Node.js with optimized checkout flow, integrated modern payment gateways, and implemented progressive web app features.",
+      results: "85% increase in conversion rates, 300% faster loading times, 200% increase in mobile traffic, and 150% revenue growth within the first quarter.",
+      services: ["Web Development", "UX/UI Design", "Performance Optimization", "SEO", "Analytics Integration"],
+      technologies: ["React.js", "Node.js", "MongoDB", "Stripe API", "AWS"],
+      projectImages: [
         {
-          title: "The Challenge",
-          content: "RetailMax was struggling with an outdated e-commerce platform that resulted in 60% cart abandonment rates, poor mobile experience, and loading times exceeding 8 seconds. Their conversion rates were plummeting, and customer satisfaction was at an all-time low.",
-          image: "https://images.pexels.com/photos/4968630/pexels-photo-4968630.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["60% Cart Abandonment", "8+ Second Load Times", "Poor Mobile Experience"]
-        },
-        {
-          title: "Our Solution",
-          content: "We built a modern, responsive e-commerce platform using React.js and Node.js with optimized checkout flow, integrated modern payment gateways, and implemented progressive web app features for lightning-fast performance.",
+          title: "Homepage Design",
           image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["React.js Frontend", "Node.js Backend", "PWA Features"]
+          description: "Modern homepage with hero section and product showcase"
         },
         {
-          title: "Key Features",
-          content: "The new platform includes one-click checkout, real-time inventory tracking, advanced product filtering, mobile-first responsive design, and AI-powered product recommendations that transformed the shopping experience.",
+          title: "Product Catalog",
           image: "https://images.pexels.com/photos/4050312/pexels-photo-4050312.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["One-Click Checkout", "AI Recommendations", "Real-time Tracking"]
+          description: "Advanced filtering and search functionality"
         },
         {
-          title: "Results & Impact",
-          content: "The transformation delivered exceptional results: 85% increase in conversion rates, 300% faster loading times, 200% increase in mobile traffic, and 150% revenue growth within the first quarter of launch.",
+          title: "Checkout Process",
           image: "https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["85% Conversion Increase", "300% Faster Loading", "150% Revenue Growth"]
+          description: "Streamlined one-click checkout experience"
+        },
+        {
+          title: "Mobile Experience",
+          image: "https://images.pexels.com/photos/4968630/pexels-photo-4968630.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Responsive design optimized for mobile devices"
+        },
+        {
+          title: "Admin Dashboard",
+          image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive admin panel for inventory management"
+        },
+        {
+          title: "Analytics Dashboard",
+          image: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Real-time analytics and reporting system"
         }
       ],
       testimonial: "Arohance Tech transformed our struggling online store into a conversion machine. Sales have never been better!"
@@ -57,72 +68,100 @@ const CaseStudies = () => {
       client: "SecureBank Digital",
       industry: "Financial Services",
       type: "Mobile App",
+      year: "2024",
+      duration: "8 months",
+      team: "7 people",
       icon: <Smartphone className="w-6 h-6" />,
-      problem: "Need for secure, user-friendly mobile banking solution",
-      description: "Comprehensive mobile banking app with biometric security and real-time transaction features.",
       image: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800",
-      slides: [
+      description: "Comprehensive mobile banking app with biometric security and real-time transaction features.",
+      overview: "SecureBank needed a mobile banking solution that met strict security compliance requirements while providing an intuitive user experience. The challenge was balancing security with usability.",
+      challenge: "Creating a mobile banking app that meets stringent financial regulations while maintaining user-friendly interface and ensuring top-level security for financial transactions.",
+      solution: "We developed a secure mobile banking app using React Native with advanced biometric authentication, end-to-end encryption, and real-time banking features that exceeded industry security standards.",
+      results: "400% increase in user adoption, 99.9% reduction in security incidents, 70% faster transaction processing, and maintained a 4.8/5 star rating from users.",
+      services: ["Mobile App Development", "Security Implementation", "UX/UI Design", "API Integration", "Compliance Testing"],
+      technologies: ["React Native", "Node.js", "PostgreSQL", "AWS", "Biometric APIs"],
+      projectImages: [
         {
-          title: "Security Challenge",
-          content: "SecureBank needed a mobile banking solution that met strict security compliance requirements while providing an intuitive user experience. The challenge was balancing security with usability.",
+          title: "Login & Security",
           image: "https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Strict Compliance", "Security First", "User-Friendly Design"]
+          description: "Biometric authentication and security features"
         },
         {
-          title: "Development Approach",
-          content: "We developed a secure mobile banking app using React Native with advanced biometric authentication, end-to-end encryption, and real-time banking features that exceeded industry security standards.",
+          title: "Dashboard Overview",
           image: "https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["React Native", "End-to-End Encryption", "Biometric Auth"]
+          description: "Clean and intuitive account overview"
         },
         {
-          title: "Advanced Features",
-          content: "The app includes biometric authentication, real-time transaction notifications, advanced security protocols, intuitive money transfer system, and comprehensive account management capabilities.",
+          title: "Transaction History",
           image: "https://images.pexels.com/photos/4386374/pexels-photo-4386374.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Face ID/Fingerprint", "Real-time Notifications", "Account Management"]
+          description: "Detailed transaction tracking and history"
         },
         {
-          title: "Outstanding Results",
-          content: "The app achieved 400% increase in user adoption, 99.9% reduction in security incidents, 70% faster transaction processing, and maintained a 4.8/5 star rating from users.",
+          title: "Money Transfer",
           image: "https://images.pexels.com/photos/4386442/pexels-photo-4386442.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["400% User Adoption", "99.9% Security", "4.8/5 Rating"]
+          description: "Seamless money transfer functionality"
+        },
+        {
+          title: "Card Management",
+          image: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Digital card management and controls"
+        },
+        {
+          title: "Investment Portfolio",
+          image: "https://images.pexels.com/photos/5473302/pexels-photo-5473302.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Investment tracking and portfolio management"
         }
       ],
       testimonial: "The app exceeded our security standards while delivering an exceptional user experience."
     },
     {
       id: 3,
-      title: "Healthcare Management System",
+      title: "Healthcare Management",
       client: "MediCare Solutions",
       industry: "Healthcare",
       type: "Web App",
+      year: "2023",
+      duration: "10 months",
+      team: "8 people",
       icon: <Monitor className="w-6 h-6" />,
-      problem: "Fragmented patient data across multiple systems",
-      description: "Unified healthcare management platform streamlining patient care and administrative tasks.",
       image: "https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800",
-      slides: [
+      description: "Unified healthcare management platform streamlining patient care and administrative tasks.",
+      overview: "MediCare faced fragmented patient data across multiple departments, HIPAA compliance requirements, complex scheduling needs, and integration challenges with legacy systems affecting patient care quality.",
+      challenge: "Creating a unified system that consolidates patient data from multiple sources while maintaining HIPAA compliance and integrating with existing medical equipment and legacy systems.",
+      solution: "We created a comprehensive healthcare management system using Vue.js and Python Django with secure patient data management, automated scheduling, and real-time analytics dashboards.",
+      results: "60% improvement in efficiency, 95% increase in data accuracy, 40% higher patient satisfaction, and 30% reduction in administrative costs.",
+      services: ["Web Development", "System Integration", "Data Migration", "Compliance Implementation", "Training & Support"],
+      technologies: ["Vue.js", "Python Django", "PostgreSQL", "Redis", "Docker"],
+      projectImages: [
         {
-          title: "Healthcare Challenge",
-          content: "MediCare faced fragmented patient data across multiple departments, HIPAA compliance requirements, complex scheduling needs, and integration challenges with legacy systems affecting patient care quality.",
+          title: "Patient Dashboard",
           image: "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Data Silos", "HIPAA Compliance", "Legacy Integration"]
+          description: "Comprehensive patient information overview"
         },
         {
-          title: "Comprehensive Solution",
-          content: "We created a unified healthcare management system using Vue.js and Python Django with secure patient data management, automated scheduling, and real-time analytics dashboards.",
+          title: "Appointment Scheduling",
           image: "https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Vue.js Frontend", "Python Django", "Real-time Analytics"]
+          description: "Automated scheduling and calendar management"
         },
         {
-          title: "System Features",
-          content: "The platform provides centralized patient records, automated appointment scheduling, real-time analytics dashboard, HIPAA-compliant data storage, and seamless integration with medical devices.",
+          title: "Medical Records",
           image: "https://images.pexels.com/photos/4386370/pexels-photo-4386370.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Centralized Records", "Auto Scheduling", "Device Integration"]
+          description: "Digital medical records and history"
         },
         {
-          title: "Healthcare Impact",
-          content: "The system delivered 60% improvement in efficiency, 95% increase in data accuracy, 40% higher patient satisfaction, and 30% reduction in administrative costs.",
+          title: "Analytics Dashboard",
           image: "https://images.pexels.com/photos/4386442/pexels-photo-4386442.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["60% Efficiency", "95% Data Accuracy", "40% Satisfaction"]
+          description: "Healthcare analytics and reporting"
+        },
+        {
+          title: "Staff Management",
+          image: "https://images.pexels.com/photos/4386374/pexels-photo-4386374.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Staff scheduling and management system"
+        },
+        {
+          title: "Billing System",
+          image: "https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Integrated billing and insurance management"
         }
       ],
       testimonial: "This system revolutionized how we manage patient care. Everything is now seamlessly connected."
@@ -133,34 +172,48 @@ const CaseStudies = () => {
       client: "PropertyPro Realty",
       industry: "Real Estate",
       type: "Website",
+      year: "2024",
+      duration: "7 months",
+      team: "6 people",
       icon: <Globe className="w-6 h-6" />,
-      problem: "Lack of modern property search and virtual tour capabilities",
-      description: "Advanced real estate platform with 3D virtual tours and AI-powered property matching.",
       image: "https://images.pexels.com/photos/1974596/pexels-photo-1974596.jpeg?auto=compress&cs=tinysrgb&w=800",
-      slides: [
+      description: "Advanced real estate platform with 3D virtual tours and AI-powered property matching.",
+      overview: "PropertyPro needed modern property search capabilities, high-resolution image management, virtual tour integration, and lead generation optimization to compete in the digital real estate market.",
+      challenge: "Building a sophisticated real estate platform that handles large property databases, integrates virtual tour technology, and provides intelligent property matching for buyers.",
+      solution: "We built a cutting-edge real estate platform using Next.js with 3D virtual tours, advanced search filters, and AI-powered property recommendations that revolutionized property browsing.",
+      results: "250% increase in lead generation, 180% improvement in user engagement, 300% more property views, and 120% higher conversion rates.",
+      services: ["Web Development", "3D Integration", "AI Implementation", "SEO Optimization", "Lead Generation"],
+      technologies: ["Next.js", "Three.js", "Python", "MongoDB", "AWS"],
+      projectImages: [
         {
-          title: "Market Challenge",
-          content: "PropertyPro needed modern property search capabilities, high-resolution image management, virtual tour integration, and lead generation optimization to compete in the digital real estate market.",
+          title: "Property Listings",
           image: "https://images.pexels.com/photos/1974596/pexels-photo-1974596.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Modern Search", "Virtual Tours", "Lead Generation"]
+          description: "Beautiful property listing interface"
         },
         {
-          title: "Platform Development",
-          content: "We built a cutting-edge real estate platform using Next.js with 3D virtual tours, advanced search filters, and AI-powered property recommendations that revolutionized property browsing.",
+          title: "Virtual Tours",
           image: "https://images.pexels.com/photos/1974594/pexels-photo-1974594.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Next.js Platform", "3D Tours", "AI Matching"]
+          description: "Interactive 3D virtual property tours"
         },
         {
-          title: "Advanced Features",
-          content: "The platform includes 3D virtual property tours, advanced search and filtering, AI-powered property matching, integrated mortgage calculator, and real-time market analytics.",
-          image: "https://images.pexels.com/photos/1974596/pexels-photo-1974596.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Virtual Tours", "Smart Matching", "Market Analytics"]
+          title: "Search & Filters",
+          image: "https://images.pexels.com/photos/1974595/pexels-photo-1974595.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Advanced search and filtering system"
         },
         {
-          title: "Business Growth",
-          content: "The platform achieved 250% increase in lead generation, 180% improvement in user engagement, 300% more property views, and 120% higher conversion rates.",
-          image: "https://images.pexels.com/photos/1974594/pexels-photo-1974594.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["250% Lead Growth", "300% More Views", "120% Conversion"]
+          title: "Property Details",
+          image: "https://images.pexels.com/photos/1974592/pexels-photo-1974592.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive property information pages"
+        },
+        {
+          title: "Agent Portal",
+          image: "https://images.pexels.com/photos/1974598/pexels-photo-1974598.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Agent management and listing tools"
+        },
+        {
+          title: "Market Analytics",
+          image: "https://images.pexels.com/photos/1974593/pexels-photo-1974593.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Real estate market data and trends"
         }
       ],
       testimonial: "Our property listings have never looked better. The virtual tours are a game-changer!"
@@ -171,81 +224,264 @@ const CaseStudies = () => {
       client: "FitLife Technologies",
       industry: "Health & Fitness",
       type: "Mobile App",
+      year: "2024",
+      duration: "5 months",
+      team: "4 people",
       icon: <Smartphone className="w-6 h-6" />,
-      problem: "Need for comprehensive fitness tracking with social features",
-      description: "Social fitness app with workout tracking, nutrition monitoring, and community challenges.",
       image: "https://images.pexels.com/photos/4162483/pexels-photo-4162483.jpeg?auto=compress&cs=tinysrgb&w=800",
-      slides: [
+      description: "Social fitness app with workout tracking, nutrition monitoring, and community challenges.",
+      overview: "FitLife needed a comprehensive fitness app with complex data visualization, social features integration, wearable device compatibility, and motivational user engagement systems.",
+      challenge: "Creating a fitness app that seamlessly integrates with multiple wearable devices, provides accurate health tracking, and maintains user engagement through social features.",
+      solution: "We developed a comprehensive fitness app using React Native with social features, workout tracking, nutrition monitoring, and gamification elements that keep users motivated.",
+      results: "70% increase in user retention, 200% growth in daily active users, 85% higher workout completion rates, and maintained a 4.7/5 star app rating.",
+      services: ["Mobile Development", "Wearable Integration", "Social Features", "Data Analytics", "UI/UX Design"],
+      technologies: ["React Native", "Node.js", "MongoDB", "HealthKit", "Google Fit"],
+      projectImages: [
         {
-          title: "Fitness Challenge",
-          content: "FitLife needed a comprehensive fitness app with complex data visualization, social features integration, wearable device compatibility, and motivational user engagement systems.",
+          title: "Dashboard Overview",
           image: "https://images.pexels.com/photos/4162483/pexels-photo-4162483.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Data Visualization", "Social Features", "Wearable Integration"]
+          description: "Comprehensive fitness dashboard and stats"
         },
         {
-          title: "App Development",
-          content: "We developed a comprehensive fitness app using React Native with social features, workout tracking, nutrition monitoring, and gamification elements that keep users motivated.",
+          title: "Workout Tracking",
           image: "https://images.pexels.com/photos/4162494/pexels-photo-4162494.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["React Native", "Social Integration", "Gamification"]
+          description: "Real-time workout tracking and monitoring"
         },
         {
-          title: "Core Features",
-          content: "The app provides comprehensive workout tracking, nutrition and calorie monitoring, social challenges and leaderboards, wearable device integration, and personalized workout plans.",
-          image: "https://images.pexels.com/photos/4162483/pexels-photo-4162483.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Workout Tracking", "Social Challenges", "Personal Plans"]
+          title: "Nutrition Logging",
+          image: "https://images.pexels.com/photos/4162495/pexels-photo-4162495.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Food tracking and nutrition analysis"
         },
         {
-          title: "User Success",
-          content: "The app achieved 70% increase in user retention, 200% growth in daily active users, 85% higher workout completion rates, and maintained a 4.7/5 star app rating.",
-          image: "https://images.pexels.com/photos/4162494/pexels-photo-4162494.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["70% Retention", "200% DAU Growth", "4.7/5 Rating"]
+          title: "Social Challenges",
+          image: "https://images.pexels.com/photos/4162496/pexels-photo-4162496.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Community challenges and leaderboards"
+        },
+        {
+          title: "Progress Analytics",
+          image: "https://images.pexels.com/photos/4162497/pexels-photo-4162497.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Detailed progress tracking and insights"
+        },
+        {
+          title: "Personal Goals",
+          image: "https://images.pexels.com/photos/4162498/pexels-photo-4162498.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Goal setting and achievement tracking"
         }
       ],
       testimonial: "The app keeps our users motivated and engaged like never before!"
     },
     {
       id: 6,
-      title: "Inventory Management Suite",
+      title: "Inventory Management",
       client: "LogiTech Warehouse",
       industry: "Logistics",
       type: "Desktop App",
+      year: "2023",
+      duration: "9 months",
+      team: "5 people",
       icon: <Code className="w-6 h-6" />,
-      problem: "Manual inventory tracking causing frequent stock issues",
-      description: "Comprehensive desktop application for automated inventory management and logistics optimization.",
       image: "https://images.pexels.com/photos/4481263/pexels-photo-4481263.jpeg?auto=compress&cs=tinysrgb&w=800",
-      slides: [
+      description: "Comprehensive desktop application for automated inventory management and logistics optimization.",
+      overview: "LogiTech struggled with manual inventory processes, lack of real-time tracking, complex warehouse layouts, and integration challenges with existing systems causing operational inefficiencies.",
+      challenge: "Developing a robust desktop application that can handle complex inventory operations, integrate with existing warehouse systems, and provide real-time tracking capabilities.",
+      solution: "We created a comprehensive desktop application using Electron and React with automated inventory tracking, barcode scanning, predictive analytics, and seamless system integration.",
+      results: "98% improvement in inventory accuracy, 80% reduction in stockouts, 65% increase in operational efficiency, and 40% reduction in operational costs.",
+      services: ["Desktop Development", "System Integration", "Barcode Integration", "Analytics Implementation", "Training"],
+      technologies: ["Electron", "React", "Node.js", "SQLite", "Barcode APIs"],
+      projectImages: [
         {
-          title: "Logistics Problem",
-          content: "LogiTech struggled with manual inventory processes, lack of real-time tracking, complex warehouse layouts, and integration challenges with existing systems causing operational inefficiencies.",
+          title: "Inventory Dashboard",
           image: "https://images.pexels.com/photos/4481263/pexels-photo-4481263.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Manual Processes", "No Real-time Tracking", "System Integration"]
+          description: "Real-time inventory overview and management"
         },
         {
-          title: "Desktop Solution",
-          content: "We created a robust desktop application using Electron and React with automated inventory tracking, barcode scanning, predictive analytics, and seamless system integration.",
+          title: "Barcode Scanning",
           image: "https://images.pexels.com/photos/4481942/pexels-photo-4481942.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Electron + React", "Barcode Scanning", "Predictive Analytics"]
+          description: "Integrated barcode scanning system"
         },
         {
-          title: "System Capabilities",
-          content: "The suite provides automated inventory tracking, barcode scanning integration, predictive stock analytics, multi-warehouse management, and automated reorder notifications.",
-          image: "https://images.pexels.com/photos/4481263/pexels-photo-4481263.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["Auto Tracking", "Multi-warehouse", "Smart Notifications"]
+          title: "Warehouse Layout",
+          image: "https://images.pexels.com/photos/4481944/pexels-photo-4481944.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Visual warehouse layout and navigation"
         },
         {
-          title: "Operational Excellence",
-          content: "The system achieved 98% improvement in inventory accuracy, 80% reduction in stockouts, 65% increase in operational efficiency, and 40% reduction in operational costs.",
-          image: "https://images.pexels.com/photos/4481942/pexels-photo-4481942.jpeg?auto=compress&cs=tinysrgb&w=800",
-          stats: ["98% Accuracy", "80% Less Stockouts", "40% Cost Reduction"]
+          title: "Stock Analytics",
+          image: "https://images.pexels.com/photos/4481945/pexels-photo-4481945.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Predictive analytics and stock insights"
+        },
+        {
+          title: "Order Management",
+          image: "https://images.pexels.com/photos/4481946/pexels-photo-4481946.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Order processing and fulfillment tracking"
+        },
+        {
+          title: "Reporting System",
+          image: "https://images.pexels.com/photos/4481947/pexels-photo-4481947.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive reporting and analytics"
         }
       ],
       testimonial: "This system eliminated our inventory nightmares. We now have complete visibility and control."
+    },
+    {
+      id: 7,
+      title: "EdTech Learning Platform",
+      client: "EduMaster Academy",
+      industry: "Education",
+      type: "Web App",
+      year: "2024",
+      duration: "8 months",
+      team: "9 people",
+      icon: <Monitor className="w-6 h-6" />,
+      image: "https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=800",
+      description: "Interactive online learning platform with AI-powered personalized curriculum and progress tracking.",
+      overview: "EduMaster needed a modern e-learning platform that could deliver personalized education experiences, track student progress effectively, and provide interactive learning tools for multiple subjects.",
+      challenge: "Building a scalable education platform that supports multiple content types, provides personalized learning paths, and integrates with various educational tools and assessments.",
+      solution: "We developed an advanced learning management system using React and Django with AI-powered content recommendations, interactive assessments, and comprehensive progress analytics.",
+      results: "300% increase in student engagement, 85% improvement in completion rates, 200% growth in active users, and 95% student satisfaction rating.",
+      services: ["Web Development", "AI Integration", "Content Management", "Assessment Tools", "Analytics Dashboard"],
+      technologies: ["React", "Django", "PostgreSQL", "TensorFlow", "AWS"],
+      projectImages: [
+        {
+          title: "Student Dashboard",
+          image: "https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Personalized student learning dashboard"
+        },
+        {
+          title: "Course Catalog",
+          image: "https://images.pexels.com/photos/4144924/pexels-photo-4144924.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive course catalog and enrollment"
+        },
+        {
+          title: "Interactive Lessons",
+          image: "https://images.pexels.com/photos/4144925/pexels-photo-4144925.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Interactive video lessons and content"
+        },
+        {
+          title: "Assessment System",
+          image: "https://images.pexels.com/photos/4144926/pexels-photo-4144926.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Advanced assessment and testing tools"
+        },
+        {
+          title: "Progress Tracking",
+          image: "https://images.pexels.com/photos/4144927/pexels-photo-4144927.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Detailed progress analytics and insights"
+        },
+        {
+          title: "Teacher Portal",
+          image: "https://images.pexels.com/photos/4144928/pexels-photo-4144928.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive teacher management tools"
+        }
+      ],
+      testimonial: "Our students love the interactive learning experience. Engagement has skyrocketed!"
+    },
+    {
+      id: 8,
+      title: "Restaurant Management",
+      client: "Gourmet Chain",
+      industry: "Food & Beverage",
+      type: "Web App",
+      year: "2023",
+      duration: "6 months",
+      team: "6 people",
+      icon: <Monitor className="w-6 h-6" />,
+      image: "https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800",
+      description: "Complete restaurant management system with POS integration, inventory tracking, and customer ordering.",
+      overview: "Gourmet Chain needed a unified system to manage multiple restaurant locations, streamline ordering processes, track inventory across locations, and provide customer-facing ordering solutions.",
+      challenge: "Creating a multi-location restaurant management system that integrates with existing POS systems, manages complex inventory, and provides seamless customer ordering experiences.",
+      solution: "We built a comprehensive restaurant management platform using Angular and Node.js with POS integration, real-time inventory management, and customer ordering capabilities.",
+      results: "50% reduction in order processing time, 75% improvement in inventory accuracy, 120% increase in online orders, and 40% reduction in food waste.",
+      services: ["Web Development", "POS Integration", "Inventory Management", "Mobile Ordering", "Analytics"],
+      technologies: ["Angular", "Node.js", "MongoDB", "Socket.io", "Stripe"],
+      projectImages: [
+        {
+          title: "Restaurant Dashboard",
+          image: "https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive restaurant operations dashboard"
+        },
+        {
+          title: "Order Management",
+          image: "https://images.pexels.com/photos/1581385/pexels-photo-1581385.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Real-time order tracking and management"
+        },
+        {
+          title: "Menu Management",
+          image: "https://images.pexels.com/photos/1581386/pexels-photo-1581386.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Digital menu creation and management"
+        },
+        {
+          title: "Inventory Tracking",
+          image: "https://images.pexels.com/photos/1581387/pexels-photo-1581387.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Real-time inventory and supply management"
+        },
+        {
+          title: "Customer Ordering",
+          image: "https://images.pexels.com/photos/1581388/pexels-photo-1581388.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Customer-facing ordering interface"
+        },
+        {
+          title: "Analytics Reports",
+          image: "https://images.pexels.com/photos/1581389/pexels-photo-1581389.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Sales analytics and performance reports"
+        }
+      ],
+      testimonial: "This system streamlined our operations across all locations. Efficiency has improved dramatically!"
+    },
+    {
+      id: 9,
+      title: "Travel Booking Platform",
+      client: "Wanderlust Travels",
+      industry: "Travel & Tourism",
+      type: "Website",
+      year: "2024",
+      duration: "7 months",
+      team: "8 people",
+      icon: <Globe className="w-6 h-6" />,
+      image: "https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=800",
+      description: "Comprehensive travel booking platform with AI recommendations, itinerary planning, and social features.",
+      overview: "Wanderlust Travels wanted to create a modern travel booking platform that combines booking functionality with social travel features, AI-powered recommendations, and comprehensive itinerary planning tools.",
+      challenge: "Integrating multiple travel APIs, creating intelligent recommendation systems, and building social features while maintaining fast performance and reliable booking processes.",
+      solution: "We developed a feature-rich travel platform using Vue.js and Laravel with AI-powered recommendations, social travel features, and seamless booking integration with major travel providers.",
+      results: "180% increase in bookings, 90% improvement in user engagement, 250% growth in repeat customers, and 4.6/5 customer satisfaction rating.",
+      services: ["Web Development", "API Integration", "AI Implementation", "Social Features", "Payment Integration"],
+      technologies: ["Vue.js", "Laravel", "MySQL", "Python", "Third-party APIs"],
+      projectImages: [
+        {
+          title: "Search & Discovery",
+          image: "https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Intelligent travel search and discovery"
+        },
+        {
+          title: "Booking Interface",
+          image: "https://images.pexels.com/photos/1008156/pexels-photo-1008156.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Streamlined booking process and payments"
+        },
+        {
+          title: "Itinerary Planner",
+          image: "https://images.pexels.com/photos/1008157/pexels-photo-1008157.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Interactive itinerary planning tools"
+        },
+        {
+          title: "Travel Community",
+          image: "https://images.pexels.com/photos/1008158/pexels-photo-1008158.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Social features and travel community"
+        },
+        {
+          title: "Trip Management",
+          image: "https://images.pexels.com/photos/1008159/pexels-photo-1008159.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "Comprehensive trip management dashboard"
+        },
+        {
+          title: "Reviews & Ratings",
+          image: "https://images.pexels.com/photos/1008160/pexels-photo-1008160.jpeg?auto=compress&cs=tinysrgb&w=800",
+          description: "User reviews and destination ratings"
+        }
+      ],
+      testimonial: "Our booking rates have tripled! The platform makes travel planning effortless and enjoyable."
     }
   ];
 
-  // Initialize animations for case study cards
+  // Hero animation
   useEffect(() => {
-    // Hero animation
     if (heroRef.current) {
       const children = Array.from(heroRef.current.children);
       children.forEach((child, index) => {
@@ -260,7 +496,7 @@ const CaseStudies = () => {
       });
     }
 
-    // Cards animation on scroll
+    // Grid animation on scroll
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '-50px 0px'
@@ -276,13 +512,14 @@ const CaseStudies = () => {
       });
     }, observerOptions);
 
-    cardsRef.current.forEach(card => {
-      if (card) {
+    if (gridRef.current) {
+      const cards = gridRef.current.querySelectorAll('.case-study-card');
+      cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(50px) scale(0.95)';
         observer.observe(card);
-      }
-    });
+      });
+    }
 
     return () => {
       observer.disconnect();
@@ -292,95 +529,14 @@ const CaseStudies = () => {
   // Handle opening case study details
   const openCaseStudy = (study) => {
     setSelectedStudy(study);
-    setCurrentSlide(0);
     document.body.style.overflow = 'hidden';
   };
 
   // Handle closing case study details
   const closeDetailedView = () => {
     setSelectedStudy(null);
-    setCurrentSlide(0);
     document.body.style.overflow = 'auto';
   };
-
-  // Handle direct slide navigation
-  const goToSlide = (slideIndex) => {
-    if (slideIndex >= 0 && slideIndex < selectedStudy.slides.length) {
-      setCurrentSlide(slideIndex);
-      
-      if (horizontalRef.current) {
-        horizontalRef.current.style.transition = 'transform 0.8s ease-out';
-        horizontalRef.current.style.transform = `translateX(-${slideIndex * 100}vw)`;
-      }
-    }
-  };
-
-  // Horizontal scrolling animation for detailed case study
-  useEffect(() => {
-    if (!selectedStudy || !horizontalRef.current) return;
-
-    const slides = slidesRef.current;
-    const totalSlides = selectedStudy.slides.length;
-    
-    // Set up horizontal container
-    horizontalRef.current.style.width = `${totalSlides * 100}vw`;
-    horizontalRef.current.style.transform = `translateX(-${currentSlide * 100}vw)`;
-
-    // Position slides horizontally
-    slides.forEach((slide, index) => {
-      if (slide) {
-        slide.style.position = 'absolute';
-        slide.style.left = `${index * 100}vw`;
-        slide.style.width = '100vw';
-        slide.style.height = '100vh';
-      }
-    });
-
-    // Scroll handling with proper debouncing
-    let isScrolling = false;
-    let scrollTimeout;
-    
-    const handleScroll = (e) => {
-      e.preventDefault();
-      
-      if (isScrolling) return;
-      
-      const delta = e.deltaY;
-      const threshold = 30;
-      
-      if (Math.abs(delta) < threshold) return;
-      
-      isScrolling = true;
-      
-      if (delta > 0 && currentSlide < totalSlides - 1) {
-        // Next slide
-        goToSlide(currentSlide + 1);
-      } else if (delta < 0 && currentSlide > 0) {
-        // Previous slide
-        goToSlide(currentSlide - 1);
-      } else {
-        isScrolling = false;
-        return;
-      }
-      
-      // Reset scrolling flag after animation
-      scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-      }, 900);
-    };
-
-    const modalElement = document.querySelector('.modal-container');
-    if (modalElement) {
-      modalElement.addEventListener('wheel', handleScroll, { passive: false });
-    }
-
-    return () => {
-      if (modalElement) {
-        modalElement.removeEventListener('wheel', handleScroll);
-      }
-      clearTimeout(scrollTimeout);
-    };
-  }, [selectedStudy, currentSlide]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -389,14 +545,6 @@ const CaseStudies = () => {
       
       if (e.key === 'Escape') {
         closeDetailedView();
-      } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        if (currentSlide < selectedStudy.slides.length - 1) {
-          goToSlide(currentSlide + 1);
-        }
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        if (currentSlide > 0) {
-          goToSlide(currentSlide - 1);
-        }
       }
     };
 
@@ -407,36 +555,25 @@ const CaseStudies = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [selectedStudy, currentSlide]);
+  }, [selectedStudy]);
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center px-4 overflow-hidden">
-        {/* Silk Background Animation */}
-        <div className="absolute inset-0 z-0">
-          <Silk
-            speed={5}
-            scale={1}
-            color="#1e3a8a"
-            noiseIntensity={1.5}
-            rotation={0}
-          />
-        </div>
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60 z-10"></div>
-        
-        {/* Additional atmospheric effects */}
-        <div className="absolute inset-0 opacity-20 z-10">
-          <div className="absolute top-1/4 left-1/4 w-48 h-48 md:w-96 md:h-96  rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96  rounded-full blur-3xl"></div>
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-blue-600 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-purple-600 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
         
         <div className="container mx-auto text-center relative z-20" ref={heroRef}>
           <div className="mb-6 md:mb-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 md:mb-6 bg-white bg-clip-text text-transparent">
-              Case Studies
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+              Our Cases
             </h1>
           </div>
           <div className="mb-6 md:mb-8">
@@ -450,7 +587,7 @@ const CaseStudies = () => {
             </p>
           </div>
           <div className="animate-bounce">
-            <ArrowRight className="w-6 h-6 md:w-8 md:h-8 mx-auto rotate-90 text-gray-400" />
+            <ChevronDown className="w-6 h-6 md:w-8 md:h-8 mx-auto text-gray-400" />
           </div>
         </div>
       </section>
@@ -458,50 +595,73 @@ const CaseStudies = () => {
       {/* Case Studies Grid */}
       <section className="py-12 md:py-20 px-4">
         <div className="container mx-auto">
-          <div className="space-y-16 md:space-y-32">
+          <div 
+            ref={gridRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          >
             {caseStudies.map((study, index) => (
               <div
                 key={study.id}
-                ref={el => cardsRef.current[index] = el}
-                className="bg-gradient-to-br from-gray-900 to-black border border-gray-700 rounded-sm overflow-hidden hover:border-gray-500 transition-all duration-500 cursor-pointer group relative backdrop-blur-sm max-w-5xl mx-auto"
-                style={{ height: '600px' }}
+                className={`case-study-card group relative bg-gradient-to-br from-gray-900 to-black border border-gray-700 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:border-gray-500 hover:shadow-2xl ${
+                  hoveredCard && hoveredCard !== study.id ? 'blur-sm opacity-50' : ''
+                }`}
                 onClick={() => openCaseStudy(study)}
+                onMouseEnter={() => setHoveredCard(study.id)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="grid md:grid-cols-2 gap-0" style={{ height: '600px' }}>
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={study.image}
+                    alt={study.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  
+                  {/* Type Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="text-xs px-3 py-1 bg-white/90 text-black rounded-full font-semibold">
+                      {study.type}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-white text-black rounded-lg">
+                      {study.icon}
+                    </div>
+                    <div className="text-sm text-gray-400">
+                      {study.industry}
+                    </div>
                   </div>
                   
-                  <div className="p-6 md:p-8 flex flex-col justify-center min-h-0">
-                    <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                      <div className="p-2 md:p-3 bg-white text-black rounded-sm">
-                        {study.icon}
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-gray-300 transition-colors">
+                    {study.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm mb-3 font-medium">
+                    {study.client}
+                  </p>
+                  
+                  <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-2">
+                    {study.description}
+                  </p>
+                  
+                  {/* Metadata */}
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {study.year}
                       </div>
-                      <span className="text-xs md:text-sm text-gray-400 px-3 md:px-4 py-1 md:py-2 bg-gray-800 rounded-sm border border-gray-600">
-                        {study.type}
-                      </span>
+                      <div className="flex items-center gap-1">
+                        <Users className="w-3 h-3" />
+                        {study.team}
+                      </div>
                     </div>
-                    
-                    <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-4 group-hover:text-gray-300 transition-colors">
-                      {study.title}
-                    </h3>
-                    
-                    <p className="text-gray-400 text-sm md:text-base lg:text-lg mb-3 md:mb-4 font-medium">
-                      {study.client} • {study.industry}
-                    </p>
-                    
-                    <p className="text-gray-300 text-sm md:text-base mb-4 md:mb-6 leading-relaxed line-clamp-3">
-                      {study.description}
-                    </p>
-                    
-                    <button className="bg-white text-black hover:bg-gray-200 px-4 md:px-6 py-2 md:py-3 rounded-sm font-semibold transition-all duration-300 flex items-center gap-2 md:gap-3 self-start text-sm md:text-base">
-                      View Case Study <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
-                    </button>
+                    <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </div>
@@ -510,85 +670,115 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      {/* Case Study Modal with Horizontal Scroll */}
+      {/* Detailed Case Study Modal */}
       {selectedStudy && (
-        <div className="fixed inset-0 bg-black z-50 modal-container">
-          {/* Header */}
-          <div className="fixed top-0 left-0 right-0 z-20 bg-gradient-to-b from-black via-black/90 to-transparent p-4 md:p-6">
-            <div className="flex items-center justify-between max-w-6xl mx-auto">
-              <div className="flex items-center gap-3 md:gap-4">
-                <div className="p-2 md:p-3 bg-white text-black rounded-xl">
-                  {selectedStudy.icon}
-                </div>
-                <div>
-                  <h2 className="text-lg md:text-2xl font-bold">{selectedStudy.title}</h2>
-                  <p className="text-gray-400 text-sm md:text-base">{selectedStudy.client}</p>
-                </div>
-              </div>
-              <button
-                onClick={closeDetailedView}
-                className="p-2 md:p-3 hover:bg-gray-800/50 rounded-xl transition-colors"
-              >
-                <X className="w-5 h-5 md:w-6 md:h-6" />
-              </button>
-            </div>
-          </div>
+        <div className="fixed inset-0 bg-black z-50 overflow-hidden">
+          {/* Close Button */}
+          <button
+            onClick={closeDetailedView}
+            className="fixed top-6 right-6 z-30 p-3 bg-gray-800/80 hover:bg-gray-700 rounded-full transition-colors backdrop-blur-sm"
+          >
+            <X className="w-6 h-6" />
+          </button>
 
-          {/* Horizontal Slides Container */}
-          <div className="h-screen overflow-hidden">
-            <div
-              ref={horizontalRef}
-              className="h-full flex transition-transform duration-800 ease-out"
-              style={{ width: `${selectedStudy.slides.length * 100}vw` }}
-            >
-              {selectedStudy.slides.map((slide, index) => (
-                <div
-                  key={index}
-                  ref={el => slidesRef.current[index] = el}
-                  className="w-screen h-screen flex items-center justify-center p-4 sm:p-6 md:p-8 pt-20 sm:pt-24"
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url(${slide.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="max-w-4xl mx-auto text-center px-4">
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-white">
-                      {slide.title}
-                    </h3>
-                    <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 md:mb-12 leading-relaxed">
-                      {slide.content}
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                      {slide.stats.map((stat, statIndex) => (
-                        <div
-                          key={statIndex}
-                          className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20"
-                        >
-                          <div className="text-sm md:text-lg font-semibold text-white">
-                            {stat}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+          <div className="h-screen flex">
+            {/* Left Column - Fixed Info Card */}
+            <div className="w-full lg:w-1/2 bg-gray-100 p-8 lg:p-12 flex flex-col justify-center sticky top-0 h-screen overflow-hidden">
+              <div className="max-w-xl">
+                {/* Title */}
+                <h1 className="text-4xl lg:text-5xl font-bold mb-2 text-black leading-tight">
+                  {selectedStudy.title}
+                </h1>
+                
+                {/* Industry & Type */}
+                <div className="text-gray-600 text-lg mb-8">
+                  {selectedStudy.industry} — {selectedStudy.type}
+                </div>
+
+                {/* Service Tags */}
+                <div className="mb-8">
+                  <div className="flex flex-wrap gap-2">
+                    {selectedStudy.services.slice(0, 5).map((service, index) => (
+                      <span key={index} className="px-4 py-2 bg-gray-300 text-gray-700 text-sm rounded-full font-medium">
+                        {service}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Fixed Slide Indicators */}
-          <div className="fixed bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 text-center z-20">
-            <div className="flex space-x-2">
-              {selectedStudy.slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                    index === currentSlide ? 'bg-white' : 'bg-gray-600 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
+                {/* Client Section */}
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold mb-4 text-black">Client</h3>
+                  <p className="text-gray-700 leading-relaxed text-base">
+                    {selectedStudy.overview}
+                  </p>
+                </div>
+
+                {/* Process Section */}
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold mb-4 text-black">Process</h3>
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    {selectedStudy.solution}
+                  </p>
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-4 mb-8">
+                  <div className="text-center p-4 bg-orange-500 text-white rounded-lg">
+                    <div className="text-xl font-bold">{selectedStudy.duration}</div>
+                    <div className="text-orange-100 text-sm">of collaboration</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-800 text-white rounded-lg">
+                    <div className="text-xl font-bold">{selectedStudy.technologies.length}+</div>
+                    <div className="text-gray-300 text-sm">technologies used</div>
+                  </div>
+                  <div className="text-center p-4 bg-gray-800 text-white rounded-lg">
+                    <div className="text-xl font-bold">{selectedStudy.projectImages.length}</div>
+                    <div className="text-gray-300 text-sm">project deliverables</div>
+                  </div>
+                </div>
+
+                {/* Technologies */}
+                <div className="mb-8">
+                  <div className="flex flex-wrap gap-2">
+                    {selectedStudy.technologies.map((tech, index) => (
+                      <span key={index} className="px-3 py-1 bg-gray-800 text-white text-sm rounded-full">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Scrollable Project Images */}
+            <div className="hidden lg:block w-1/2 h-screen overflow-y-auto bg-black scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+              <style jsx>{`
+                div::-webkit-scrollbar {
+                  display: none;
+                }
+              `}</style>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-8 text-white sticky top-0 bg-black py-4 z-10">
+                  Project Gallery
+                </h3>
+                <div className="space-y-8">
+                  {selectedStudy.projectImages.map((image, index) => (
+                    <div key={index} className="group">
+                      <div className="relative overflow-hidden rounded-xl mb-4">
+                        <img
+                          src={image.image}
+                          alt={image.title}
+                          className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <h4 className="text-lg font-semibold text-white mb-2">{image.title}</h4>
+                      <p className="text-gray-400 text-sm leading-relaxed">{image.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

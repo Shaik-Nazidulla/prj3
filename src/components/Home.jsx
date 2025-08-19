@@ -227,71 +227,71 @@ function Home() {
   }, []);
 
   return (
-    <div className="bg-black text-white">
-      {/* Hero Section - Extended height for scrolling content */}
-      <section ref={heroSectionRef} className="relative hero-section" style={{ height: '200vh' }}>
-        {/* Background Video - Fixed/Sticky */}
-        <div ref={videoContainerRef} className="sticky top-0 w-full h-screen z-0">
-          <video 
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src={sampleVideo} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
+  <div className="bg-black text-white">
+    {/* Hero Section - Extended height for scrolling content */}
+    <section ref={heroSectionRef} className="relative hero-section" style={{ height: '200vh' }}>
+      {/* Background Video - Fixed/Sticky */}
+      <div ref={videoContainerRef} className="sticky top-0 w-full h-screen z-0">
+        <video 
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src={sampleVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
 
-        {/* Hero Text Container - Positioned absolutely over video with negative margin to overlay */}
-        <div ref={heroContainerRef} className="relative z-30 -mt-[100vh]">
-          <div className="flex flex-col justify-center items-start pl-0 pr-0 pointer-events-none font-sans lg:pt-150 md:pt-170 sm:pt-150" style={{ height: '100vh' }}>
-            {/* Hero Text Structure with Individual Refs */}
-            <div className="flex flex-col">
-              {/* "THE" - Top */}
-              <div 
-                ref={heroTheRef}
-                className="text-[20vw] font-[20] leading-[0.9] tracking-tight text-white opacity-0"
-              >
-                THE
-              </div>
-              
-              {/* "AROHANCE" - Middle */}
-              <div 
-                ref={heroArohanceRef}
-                className="text-[20vw] font-[20] leading-[0.9] tracking-tight text-white opacity-0"
-              >
-                AROHANCE
-              </div>
-              
-              {/* "Tech Team" - Bottom */}
-              <div 
-                ref={heroTechTeamRef}
-                className="text-[10vw] md:text-[8vw] lg:text-[13vw] font-light leading-[0.9] tracking-tight text-white mt-2 opacity-0"
-              >
-                Tech Team
-              </div>
-            </div>
-
-            {/* Description Text - Separate div */}
+      {/* Hero Text Container - Positioned absolutely over video with negative margin to overlay */}
+      <div ref={heroContainerRef} className="relative z-30 -mt-[100vh]">
+        <div className="flex flex-col justify-center items-start pl-0 pr-0 pointer-events-none font-sans lg:pt-150 md:pt-170 sm:pt-150" style={{ height: '100vh' }}>
+          {/* Hero Text Structure with Individual Refs */}
+          <div className="flex flex-col">
+            {/* "THE" - Top with increased font weight */}
             <div 
-              ref={heroDescriptionRef} 
-              className="mt-8 md:mt-12 max-w-2xl text-xl md:text-2xl opacity-0 leading-relaxed text-white ml-20"
+              ref={heroTheRef}
+              className="text-[20vw] font-bold leading-[0.9] tracking-tight text-white opacity-0"
             >
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae architecto ad cumque sequi officia repellendus et praesentium odit libero adipisci, impedit corrupti numquam earum mollitia consectetur dolorum explicabo veritatis quasi?</p>
+              THE
+            </div>
+            
+            {/* "AROHANCE" - Middle with increased font weight and max width constraint */}
+            <div 
+              ref={heroArohanceRef}
+              className="text-[12vw] font-extrabold leading-[0.9] tracking-tight text-white opacity-0 max-w-[50vw]"
+            >
+              AROHANCE
+            </div>
+            
+            {/* "Tech Team" - Bottom */}
+            <div 
+              ref={heroTechTeamRef}
+              className="text-[10vw] md:text-[8vw] lg:text-[13vw] font-light leading-[0.9] tracking-tight text-white mt-2 opacity-0"
+            >
+              Tech Team
             </div>
           </div>
+
+          {/* Description Text - Separate div */}
+          <div 
+            ref={heroDescriptionRef} 
+            className="mt-8 md:mt-12 max-w-2xl text-xl md:text-2xl opacity-0 leading-relaxed text-white ml-20"
+          >
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae architecto ad cumque sequi officia repellendus et praesentium odit libero adipisci, impedit corrupti numquam earum mollitia consectetur dolorum explicabo veritatis quasi?</p>
+          </div>
         </div>
-      </section>
-      <WorksSection />
-      <TeamMembersSection />
-      <AboutUs/>
-      <Testimonials/>
-      <HomeFAQs/>
-    </div>
-  );
+      </div>
+    </section>
+    <WorksSection />
+    <TeamMembersSection />
+    <AboutUs/>
+    <Testimonials/>
+    <HomeFAQs/>
+  </div>
+);
 }
 
 export default Home;
