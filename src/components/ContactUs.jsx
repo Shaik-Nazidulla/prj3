@@ -271,7 +271,7 @@ const ContactUs = () => {
               <div className="overflow-hidden rounded-sm shadow-2xl">
                 <div className="aspect-[3/4] lg:aspect-[3/4] bg-white relative">
                   <img
-                    src="./src/assets/download.png"
+                    src="@assets/bengaluruImg.png"
                     alt="Our Office"
                     className="w-full h-full object-cover"
                     onError={(e) => {

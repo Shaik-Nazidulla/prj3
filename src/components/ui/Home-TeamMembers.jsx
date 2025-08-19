@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import Rohan from "../../assets/Rohan-profile.jpg";
-import Kunal from "../../assets/kunal-profile.jpg";
-import Nazi from "../../assets/Nazi-profile.jpg";
+import Rohan from "@assets/Rohan-profile.jpg";
+import Kunal from "@assets/kunal-profile.jpg";
+import Nazi from "@assets/Nazi-profile.jpg";
 
 
 const TeamMembersSection = () => {
