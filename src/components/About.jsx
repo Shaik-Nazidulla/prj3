@@ -388,7 +388,7 @@ function About() {
                 <CardSwap
                   cardDistance={30}
                   verticalDistance={50}
-                  delay={4000}
+                  delay={3000}
                   pauseOnHover={true}
                 >
                   {workflowSteps.map((step, index) => {
@@ -462,7 +462,7 @@ function About() {
                   <CardSwap
                     cardDistance={isMobile ? 15 : 20}
                     verticalDistance={isMobile ? 30 : 40}
-                    delay={4000}
+                    delay={3000}
                     pauseOnHover={true}
                   >
                     {workflowSteps.map((step, index) => {

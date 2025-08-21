@@ -13,11 +13,20 @@ const CaseStudies = () => {
   const gridRef = useRef(null);
   const navigate = useNavigate(); 
 
-
-  // Handle navigation to contact us page
+  // Handle navigation to contact us page - UPDATED to scroll to top
   const handleContactNavigation = () => {
-    navigate('/ContactUs'); 
+    navigate('/ContactUs');
+    // Scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
+
+  // Alternative approach: You can also use this method
+  // const handleContactNavigation = () => {
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  //   navigate('/ContactUs');
+  // };
 
   // Hero animation
   useEffect(() => {

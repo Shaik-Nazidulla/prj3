@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import HomeFAQs from './ui/Home-FAQs';
 import Testimonials from './ui/Home-Testimonials';
 import AboutUs from './ui/Home-AboutUs';
-
+import OurClients from './ui/Home-OurClients';
+import OurServices from './ui/Home-OurServices';
 gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
@@ -24,54 +25,12 @@ function Home() {
   const heroContainerRef = useRef(null);
 
   useEffect(() => {
-    // Hero Text Animations - Individual ScrollTrigger animations for each hero text element
+    // Set initial states for all elements
     if (heroTheRef.current) {
       gsap.set(heroTheRef.current, {
         y: 100,
         opacity: 0,
         scale: 0.9
-      });
-
-      ScrollTrigger.create({
-        trigger: heroTheRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
-        onEnter: () => {
-          gsap.to(heroTheRef.current, {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out"
-          });
-        },
-        onLeave: () => {
-          gsap.to(heroTheRef.current, {
-            y: -50,
-            opacity: 0.3,
-            scale: 0.95,
-            duration: 0.8,
-            ease: "power2.out"
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(heroTheRef.current, {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "power3.out"
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(heroTheRef.current, {
-            y: 100,
-            opacity: 0,
-            scale: 0.9,
-            duration: 0.6,
-            ease: "power2.out"
-          });
-        }
       });
     }
 
@@ -81,22 +40,60 @@ function Home() {
         opacity: 0,
         scale: 0.9
       });
+    }
 
+    if (heroTechTeamRef.current) {
+      gsap.set(heroTechTeamRef.current, {
+        y: 100,
+        opacity: 0,
+        scale: 0.9
+      });
+    }
+
+    if (heroDescriptionRef.current) {
+      gsap.set(heroDescriptionRef.current, {
+        y: 50,
+        opacity: 0
+      });
+    }
+
+    // Create timeline for the staggered hero text animation (THE and AROHANCE)
+    const heroTextTimelineEnter = gsap.timeline({ paused: true });
+    
+    // Enter animation: "THE" first, then "AROHANCE"
+    if (heroTheRef.current) {
+      heroTextTimelineEnter.to(heroTheRef.current, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+    }
+
+    if (heroArohanceRef.current) {
+      heroTextTimelineEnter.to(heroArohanceRef.current, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out"
+      }, "+=0.15"); // 0.15 second delay after "THE"
+    }
+
+    // Create ScrollTrigger for the combined hero text (THE + AROHANCE)
+    // Using the first element as trigger but affecting both
+    if (heroTheRef.current) {
       ScrollTrigger.create({
-        trigger: heroArohanceRef.current,
+        trigger: heroTheRef.current,
         start: "top 85%",
         end: "bottom 15%",
         onEnter: () => {
-          gsap.to(heroArohanceRef.current, {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out"
-          });
+          heroTextTimelineEnter.play();
         },
         onLeave: () => {
-          gsap.to(heroArohanceRef.current, {
+          // Animate both elements out simultaneously
+          gsap.to([heroTheRef.current, heroArohanceRef.current], {
             y: -50,
             opacity: 0.3,
             scale: 0.95,
@@ -105,16 +102,16 @@ function Home() {
           });
         },
         onEnterBack: () => {
-          gsap.to(heroArohanceRef.current, {
+          // Show both elements immediately without animation
+          gsap.set([heroTheRef.current, heroArohanceRef.current], {
             y: 0,
             opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "power3.out"
+            scale: 1
           });
         },
         onLeaveBack: () => {
-          gsap.to(heroArohanceRef.current, {
+          // Reset both elements to initial state
+          gsap.to([heroTheRef.current, heroArohanceRef.current], {
             y: 100,
             opacity: 0,
             scale: 0.9,
@@ -125,13 +122,8 @@ function Home() {
       });
     }
 
+    // TECH TEAM - Independent viewport trigger
     if (heroTechTeamRef.current) {
-      gsap.set(heroTechTeamRef.current, {
-        y: 100,
-        opacity: 0,
-        scale: 0.9
-      });
-
       ScrollTrigger.create({
         trigger: heroTechTeamRef.current,
         start: "top 85%",
@@ -175,12 +167,8 @@ function Home() {
       });
     }
 
+    // Description - Independent viewport trigger
     if (heroDescriptionRef.current) {
-      gsap.set(heroDescriptionRef.current, {
-        y: 50,
-        opacity: 0
-      });
-
       ScrollTrigger.create({
         trigger: heroDescriptionRef.current,
         start: "top 85%",
@@ -247,13 +235,13 @@ function Home() {
 
       {/* Hero Text Container - Positioned absolutely over video with negative margin to overlay */}
       <div ref={heroContainerRef} className="relative z-30 -mt-[98vh]">
-        <div className="flex flex-col justify-center items-start pl-0 pr-0 pointer-events-none font-sans pt-5 lg:pt-160 md:pt-170 sm:pt-150" style={{ height: '100vh' }}>
+        <div className="flex flex-col justify-center items-start pl-0 pr-0 pointer-events-none font-sans pt-10 lg:pt-185 md:pt-170 sm:pt-150" style={{ height: '100vh' }}>
           {/* Hero Text Structure with Individual Refs */}
           <div className="flex flex-col">
             {/* "THE" - Top with increased font weight */}
             <div 
               ref={heroTheRef}
-              className="text-[20vw] font-bold leading-[0.9] tracking-tight text-white opacity-0"
+              className="text-[12vw] font-bold leading-[0.9] tracking-tight text-white opacity-0"
             >
               THE
             </div>
@@ -285,6 +273,8 @@ function Home() {
         </div>
       </div>
     </section>
+    <OurServices/>
+    <OurClients/>
     <WorksSection />
     <TeamMembersSection />
     <AboutUs/>

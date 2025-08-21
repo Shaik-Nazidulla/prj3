@@ -5,19 +5,42 @@ const CaseStudiesDetailed = ({ selectedStudy, onClose }) => {
   const [hoveredPreview, setHoveredPreview] = useState(null);
   const previewsRef = useRef(null);
 
-  // Handle keyboard navigation
+  // Handle keyboard navigation and browser back button
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' || e.key === 'ArrowLeft' || e.key === 'Backspace') {
         onClose();
       }
     };
 
+    // Handle browser back button
+    const handlePopState = (e) => {
+      onClose();
+    };
+
+    // Add a history state when the modal opens
+    if (selectedStudy) {
+      window.history.pushState({ modal: 'case-study-detail' }, '');
+    }
+
     document.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('popstate', handlePopState);
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('popstate', handlePopState);
     };
-  }, [onClose]);
+  }, [onClose, selectedStudy]);
+
+  // Handle modal closing
+  const handleClose = () => {
+    // Remove the history state we added
+    if (window.history.state && window.history.state.modal === 'case-study-detail') {
+      window.history.back();
+    } else {
+      onClose();
+    }
+  };
 
   // Handle universal scrolling for previews (desktop only)
   useEffect(() => {
@@ -156,12 +179,14 @@ const CaseStudiesDetailed = ({ selectedStudy, onClose }) => {
 
   return (
     <div className="detail-modal fixed inset-0 bg-black z-50 overflow-auto lg:overflow-hidden">
-      {/* Close Button - Moved to left side */}
+      {/* Close Button - Enhanced with multiple exit hints */}
       <button
-        onClick={onClose}
-        className="fixed top-6 left-6 z-30 p-3 bg-gray-800/80 hover:bg-gray-700 rounded-full transition-colors backdrop-blur-sm"
+        onClick={handleClose}
+        className="fixed top-6 left-6 z-30 p-3 bg-gray-800/80 hover:bg-gray-700 rounded-full transition-colors backdrop-blur-sm group"
+        title="Close (ESC, ←, or browser back)"
       >
         <X className="w-6 h-6" />
+        
       </button>
 
       {/* Mobile Layout - Stacked vertically */}
