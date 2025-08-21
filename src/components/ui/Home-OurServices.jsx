@@ -8,30 +8,30 @@ const ServicesSection = () => {
 
   const services = [
     {
-      title: "Briefing & Express research",
-      duration: "1 DAY",
-      description: "ONLINE INTERVIEW\nINTERNAL ANALYSIS\nDESK RESEARCH",
-      baseColor: "bg-orange-500",
-      textColor: "text-white"
-    },
-    {
-      title: "Go-to-market strategy", 
-      duration: "4 DAYS",
-      description: "TARGET AUDIENCE RESEARCH\nUNIQUE SELLING PROPOSITION\nMISSION\nPRODUCT EMOTIONAL MESSAGE\nTONE OF VOICE",
+      title: "Website Development",
+      duration: "20 DAYs",
+      description: "Modern, responsive websites for businesses and e-commerce platforms.",
       baseColor: "bg-gray-200",
       textColor: "text-gray-800"
     },
     {
-      title: "Branding",
-      duration: "15+ DAYS", 
-      description: "3 DESIGN CONCEPTS\nLOGOTYPE\nCOLOR PALATTE & FONTS\nBRANDING ASSETS\nBRANDBOOK",
+      title: "Web Applications", 
+      duration: "40 DAYS",
+      description: "Interactive web applications, dashboards, and management systems.",
       baseColor: "bg-gray-200",
       textColor: "text-gray-800"
     },
     {
-      title: "Web design & development",
-      duration: "20+ DAYS",
-      description: "LANDING PAGE (UP TO 5 BLOCKS)\nPROTOTYPE & COPYWRIGHT\nDESIGN\nWEBFLOW DEVELOPMENT",
+      title: "Mobile Applications",
+      duration: "40+ DAYS", 
+      description: "Native and cross-platform mobile apps for iOS and Android devices.",
+      baseColor: "bg-gray-200",
+      textColor: "text-gray-800"
+    },
+    {
+      title: "Desktop Applications",
+      duration: "50+ DAYS",
+      description: "Desktop software for Windows, Mac, and Linux with full system access.",
       baseColor: "bg-gray-200", 
       textColor: "text-gray-800"
     }
@@ -246,7 +246,7 @@ const ServicesSection = () => {
                   <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light leading-tight flex-1 min-w-0">
                     {service.title}
                   </h3>
-                  <span className="bg-orange-500 text-white px-3 py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-full text-sm md:text-base font-medium whitespace-nowrap flex-shrink-0">
+                  <span className="bg-black text-white px-3 py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-full text-sm md:text-base font-medium whitespace-nowrap flex-shrink-0">
                     {service.duration}
                   </span>
                 </div>

@@ -109,7 +109,7 @@ const OurClients = () => {
                   <img
                     src={imageSrc}
                     alt={`Client ${(index % clientImages.length) + 1}`}
-                    className="w-64 h-64 object-contain group-hover:scale-105 transition-transform duration-300"
+                    className="w-40 h-40 object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                   
                   {/* Hover effect overlay */}
